@@ -52,7 +52,7 @@ public:
     }
 };
 
-/*
+//*
 #pragma GCC diagnostic ignored "-Wunused-function"
 static//*/
 int test(){ // @suppress("Unused static function")
