@@ -5,6 +5,11 @@
  *      Author: Aaron
  */
 #include<bits/stdc++.h>
+#ifdef __WIN32__
+#include<windows.h>
+#else
+#include<unistd.h>
+#endif
 using namespace std;
 typedef struct player {
 	int points = -1, money = 0, troops = 0, step = 0;
@@ -75,7 +80,7 @@ void controls() {
 			"The screen will also display how many Battle Power you have. Upon prompted, enter the number of battle power you wish to exert!");
 	printf("That's it! ");
 }
-int main() {
+int mai() {
 	int players,die;
 	string places[30] = { "Camp", "Martial Arts", "Recruit", "Martial Arts",
 			"Battlefield", "Front-line Message", "Agriculture", "Super PK",
@@ -144,7 +149,13 @@ int main() {
 		scanf(" ");
 	} while (player[pNo].points < 20);
 	printf("So, the winner is...\n");
-	system("Drumrool.mp3");
+	#ifdef __WIN32__
+		system("");
+		sleep(7000);
+	#else
+		system("open Drumrool.mp3");
+		sleep(7);
+	#endif
 	printf("%s!\n", player[pNo].name);
 	printf("Congratulations!\n");
 	printf("Wanna play again?(y/n): ");
