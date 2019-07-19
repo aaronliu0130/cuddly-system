@@ -134,7 +134,7 @@ int main() {
 			}
 			strcpy(player[pNo].current,places[player[pNo].step].c_str());
 			event(player[pNo].current,pNo);
-			printf("Anyways, now for the next player!")
+			printf("Anyways, now for the next player!");
 			break;
 		default:
 			printf("Please enter a valid control!\n");
