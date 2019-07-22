@@ -5,6 +5,7 @@
  *      Author: Aaron
  */
 #include<bits/stdc++.h>
+//#define DEBUG
 #ifdef __WIN32__
 #include<windows.h>
 #else
@@ -80,7 +81,10 @@ void controls() {
 			"The screen will also display how many Battle Power you have. Upon prompted, enter the number of battle power you wish to exert!");
 	printf("That's it! ");
 }
-int mai() {
+int main() {
+#ifdef DEBUG
+	freopen("abc.txt","r",stdin);
+#endif
 	int players,die;
 	string places[30] = { "Camp", "Martial Arts", "Recruit", "Martial Arts",
 			"Battlefield", "Front-line Message", "Agriculture", "Super PK",
@@ -91,11 +95,10 @@ int mai() {
 			"Martial Arts", "Front-line Message" };
 	printf(
 			"Welcome to Richman/Uncle Wang™ Sun Tzu's Martial Arts® Board Game!\n How many players are there?Note that no one can join mid-game and that the maximum number of players is 4!");
-	scanf("%d", &players);
+	scanf("%d",&players);
 	for (int i = 0; i < players; i++) {
 		printf("Please input player %d's name!", i + 1);
 		scanf("%s", player[i].name);
-		cout<<player[i].name<<endl;
 		player[i].points++;
 	}
 	printf("Do you want to know the controls?(y/n): ");
@@ -109,17 +112,25 @@ int mai() {
 	printf("Now...\n");
 	printf("GAME START!\n");
 	printf("(press any key and then enter to continue)");
-	scanf(" ");
+	scanf("%c",&yn);
+	printf("%c\n",&yn);
 	int pNo = -1;
 	do {
 		if (++pNo > players)
 			pNo = 0;
-		cout << "\033[2J\033[1;1H";
-		printf("%s Points: %d Money: %d Battle Power: %d Current Tile: %s\n",
+#ifdef release
+	#ifdef __WIN32__
+			system("cls");
+	#else
+			system("clear");
+	#endif
+#endif
+			printf("%s Points: %d Money: %d Battle Power: %d Current Tile: %s\n",
 				player[pNo].name,player[pNo].points, player[pNo].money, player[pNo].troops,
 				player[pNo].current);
 		invalid: printf("What to do... What to do? ");
-		scanf("%c", &yn);
+		scanf("%s", &yn);
+		printf("%s\n",&yn);
 		switch (yn) {
 		case 'c':
 			controls();
@@ -161,4 +172,3 @@ int mai() {
 	printf("Wanna play again?(y/n): ");
 	return 0;
 }
-
