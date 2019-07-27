@@ -1,5 +1,5 @@
 # lintcode
-Solutions to Lintcode US Giants Ladder
+Solutions to Lintcode [US Giants Ladder](beestar.org)
 
 Each cpp file in the subfolder under src contains solution to questions in lintcode. If you want to run a specific problem, uncomment the cpp file's respective lines like following:
 
