@@ -13,6 +13,10 @@
 #endif
 using namespace std;
 typedef struct player {
+	/**
+	 * The variable type for a player that contains the player's information
+	 * @params points The player's current points the player has recieved. Must be above 0 or else the player isn't counted
+	 */
 	int points = -1, money = 0, troops = 0, step = 0;
 	char name[100], current[20] = "Camp";
 } playe;
@@ -24,7 +28,7 @@ int dice() {
 void MACard() {
 	//25 cards
 }
-void JCard() {
+void WCard() {
 
 }
 void camp(int pNo) {
@@ -70,11 +74,12 @@ void event(char event[], int pNo) {
 	}
 }
 void controls() {
-	printf("Press stands for input and press enter here.\n");
+	printf("ＤＩＳＣＬＡＩＭＥＲ：\nPress stands for input and press enter here.\n");
 	printf("Press d to roll the die!\n");
 	printf("Press m to use a Martial Card!\n");
 	printf(
 			"If you want to use a card, press the number you see under the card you want!\n");
+	printf("Same with the press w to use Wilidcards!");
 	printf(
 			"During Super PK, you enter the number of the player you want to PK with, and card selection's the same except the number's under the Card Power!\n");
 	printf(
@@ -112,8 +117,7 @@ int main() {
 	printf("Now...\n");
 	printf("GAME START!\n");
 	printf("(press any key and then enter to continue)");
-	scanf("%c",&yn);
-	printf("%c\n",&yn);
+	cin.get();
 	int pNo = -1;
 	do {
 		if (++pNo > players)
@@ -138,6 +142,8 @@ int main() {
 		case 'm':
 
 			break;
+		case 'w':
+
 		case 'd':
 			die=dice();
 			printf("You rolled a %d!\n",die);
