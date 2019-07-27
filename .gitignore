@@ -39,3 +39,7 @@
 *.tree
 .safetable/
 /.metadata/
+# Eclipse Items
+.project
+.settings
+.cproject
