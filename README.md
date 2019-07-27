@@ -1,7 +1,7 @@
 # lintcode
-solutions to lintcode
+Solutions to Lintcode US Giants Ladder
 
-each cpp file in the subfolder under src contains solution to questions in lintcode. uncomment the lines like following:
+Each cpp file in the subfolder under src contains solution to questions in lintcode. If you want to run a specific problem, uncomment the cpp file's respective lines like following:
 
 		//*
 		#pragma GCC diagnostic ignored "-Wunused-function"
@@ -15,4 +15,4 @@ into
 		static//*/
 		void test(){ // @suppress("Unused static function")
 		
-(by just removing the leading slash character) and build the project would run the test cases in the test function below those lines.
+(by just removing the leading slash character) and build the project to run the test cases in the test function below those lines.
