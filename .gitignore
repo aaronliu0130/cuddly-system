@@ -39,6 +39,8 @@
 *.tree
 .safetable/
 /.metadata/
+# APFS Files
+.DS_Store
 # Eclipse Items
 .project
 .settings
