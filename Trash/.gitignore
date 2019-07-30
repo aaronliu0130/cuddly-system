@@ -1,2 +1,50 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+.history/
+*.logging.*/
+*.pdom
+*.snap
+*.index
+*.tree
+.safetable/
+/.metadata/
+# APFS Files
+.DS_Store
+# Eclipse Items
+.project
+.cproject
+/.settings/
 /Debug/
 test.cpp
+.DS_Store
