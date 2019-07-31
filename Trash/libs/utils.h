@@ -10,9 +10,13 @@
 #include <utility>
 #include <algorithm>
 #include <initializer_list>
+#include "cttrie.h"
 using namespace std;
 template<typename KeyType, typename FunPtrType, typename Comp>
-void switchs(const KeyType &value,
+/**
+ * A legacy implementation of switch for string.
+ */
+void switchslegacy(const KeyType &value,
 		initializer_list<pair<const KeyType, FunPtrType>> sws, Comp comp) {
 	typedef pair<const KeyType &, FunPtrType> KVT;
 	auto cmp =
