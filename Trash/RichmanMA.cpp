@@ -245,19 +245,26 @@ int main() {
 		printf("%s Points: %d Money: %d Battle Power: %d Current Tile: %s\n",
 				player[pNo].name, player[pNo].points, player[pNo].money,
 				player[pNo].troops, player[pNo].current);
-		invalid: printf("What to do... What to do? ");
 		string temp;
+		restart: printf("What to do... What to do? ");
 		cin>>temp;
+		if(temp=="help"){
+			cin>>temp;
+			help(temp);
+		}
 		yn=temp.c_str()[0];
 		switch (yn) {
 		case 'c':
 			controls();
-			break;
+			goto restart;
 		case 'm':
+			//TODO: Finish MCard()
 
 			break;
 		case 'w':
+			//TODO: Finish WCard()
 
+			break;
 		case 'd':
 			die = dice();
 			printf("You rolled a %d!\n", die);
@@ -270,21 +277,32 @@ int main() {
 			}
 			strcpy(player[pNo].current, gb::places[player[pNo].step].c_str());
 			event(player[pNo].current, pNo);
-			printf("Anyways, now for the next player!");
 			break;
 		default:
-			if(temp=="help"){
-				cin>>temp;
-				help(temp);
-			}else{
-				printf("Please enter a valid control!\n");
-				goto invalid;
-			}
+			printf("Please enter a valid control!\n");
+			goto restart;
 		}
-		printf("Press any key to continue!");
-		cin.get();
+		printf("Anyways, now for the next player!\n");
+		printf("When you're going to transfer this device to %s, press any key to continue! You don't want to get your private info exploited by %s, right?",player[pNo].name,player[pNo].name);
+		cin>>temp;
+		if(temp=="Wrong"||temp=="no"||temp=="wrong"||temp=="No"){
+			printf("Selling your private info to the next player...\n");
+#ifdef __WIN32__
+			sleep(7000);
+#else
+			sleep(7);
+#endif
+			printf("Sold!");
+			goto no;
+		}
+#ifdef __WIN32__
+		system("cls");
+#else
+		system("clear");
+#endif
+		no:;
 	} while (player[pNo].points < 20);
-	printf("So, the winner is...\n");
+	printf("So, the winner is...\n");//TODO: Replace winner text with Shouty TTS
 #ifdef __WIN32__
 	system("start Drumrool.mp3");
 	sleep(7000);
