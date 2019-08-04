@@ -1,0 +1,18 @@
+os: osx
+language: cpp
+compiler: clang++
+script:
+    - g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"RichmanMA.d" -MT"RichmanMA.o" -o "RichmanMA.o" "../RichmanMA.cpp"
+    - g++  -o "Trash"  ./RichmanMA.o ./test.o
+before_deploy:
+    - git config --local user.name "Aaron Liu"
+    - git config --local user.email "aaronliu0130@gmail.com"
+    - export TRAVIS_TAG=0.0.4.$(git log --format=%H -1)-alpha
+    - git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key: "6827807f0febef3b5d7d80adc632b05b3d0f69e7"
+  file: "Trash"
+  skip_cleanup: true
+  on:
+    tags: true
