@@ -43,7 +43,6 @@
 .DS_Store
 # Eclipse Items
 .project
+.settings
 .cproject
-/.settings/
 /Debug/
-test.cpp
