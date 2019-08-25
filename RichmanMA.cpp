@@ -19,13 +19,15 @@ typedef struct player {
 	 * The variable type for a player that contains the player's information
 	 * @params points The player's current points the player has recieved. Must be above 0 or else the player isn't counted
 	 */
-	int points = -1, money = 0, troops = 0, step = 0;
+	int points = -1, money = 0, troops = 0, step = 0, wCards[21], mCards[26];
 	char name[100], current[20] = "Camp";
 } playe;
 playe player[4];
 class gb {
 public:
-	static string places[30];
+	static string places[30], wDeck[21], mDeck[26];
+	static bool wused[21], mused[26];
+	static int players;
 };
 string gb::places[30] = { "Camp", "Martial Arts", "Recruit", "Martial Arts",
 			"Battlefield", "Front-line Message", "Agriculture", "Super PK",
@@ -33,7 +35,9 @@ string gb::places[30] = { "Camp", "Martial Arts", "Recruit", "Martial Arts",
 			"Martial Arts", "Agriculture", "Training", "Agriculture", "Recruit",
 			"Martial Arts", "Battlefield", "Front-line Order", "Martial Arts",
 			"Super PK", "Martial Arts", "Recruit", "Battlefield", "Agriculture",
-			"Martial Arts", "Front-line Message" };
+			"Martial Arts", "Front-line Message" },gb::wDeck[21],gb::mDeck[26];//TODO: Add wDeck and mDeck
+bool gb::wused[21], gb::mused[26];
+int gb::players;
 int dice() {
 	srand(time(NULL));
 	return rand() % 6 + 1;
@@ -58,7 +62,7 @@ void event(char event[], int pNo) {
 				"Great job on that luck! You don't have any rewards though...\n");
 		break;
 	case 'M':
-
+		printf("You continue to learn your inherited copy of Sun Tzu's Martial Arts! You learned something new!\n You got a Martial Art Card!\n Its....\n 			a......");
 		break;
 	case 'R': {
 		printf(
@@ -70,8 +74,10 @@ void event(char event[], int pNo) {
 	case 'B':
 		printf("You decide to try and battle!\n");
 		printf("Choose a battlefield:");
+		//TODO: Add battlefields
 		break;
 	case 'F':
+		printf("The frontline gave some help!\n You got a Wildcard!\n Its....\n 			a......");
 
 		break;
 	case 'A': {
@@ -83,6 +89,7 @@ void event(char event[], int pNo) {
 		break;
 	}
 	case 'S':
+		//TODO: Add super dramatic SUPER PK TTS audio
 
 		break;
 	case 'T':
@@ -169,7 +176,20 @@ void help(string param) {
 					printf("Okay then. Saved a bit of work for me.");
 				}else{
 					printf("Here you go!\n");
+#ifdef __WIN32__
+					system("start Drumrool.mp3");
+					sleep(7000);
+#else
+					system("open Drumrool.mp3");
+					sleep(7);
+#endif
 					printf("Details in https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode!\n");
+#ifdef __WIN32_
+					sleep(3000);
+#else
+					sleep(3);
+#endif
+
 					printf("░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄\n");
 					printf("░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄\n");
 					printf("░░░█░░░▒▒▒▒▒▒░░░░░░░░▒▒▒░░█\n");
@@ -207,14 +227,19 @@ void help(string param) {
 #endif
 }
 int main() {
+	srand(time(NULL));
 #ifdef DEBUG
 	freopen("abc.txt","r",stdin);
 #endif
-	int players, die;
+	int die;
 	printf(
 			"Welcome to Richman/Uncle Wang Sun Tzu's Martial Arts Board Game!\n How many players are there? Note that no one can join mid-game and that the maximum number of players is 4!");
-	scanf("%d", &players);
-	for (int i = 0; i < players; i++) {
+	scanf("%d", &gb::players);
+	if(gb::players<=1||gb::players>4){
+		printf("Invalid Number. exit;");
+		return 52;
+	}
+	for (int i = 0; i < gb::players; i++) {
 		printf("Please input player %d's name!", i + 1);
 		scanf("%s", player[i].name);
 		player[i].points++;
@@ -233,7 +258,7 @@ int main() {
 	cin.get();
 	int pNo = -1;
 	do {
-		if (++pNo > players)
+		if (++pNo > gb::players)
 			pNo = 0;
 #ifdef release
 #ifdef __WIN32__
