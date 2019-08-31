@@ -13,12 +13,15 @@ script:
 before_deploy:
     - git config --local user.name "Aaron Liu"
     - git config --local user.email "aaronliu0130@gmail.com"
-    - export TRAVIS_TAG=0.1.0
+    - export TRAVIS_TAG=0.1.0.(git log --format=%H -1)-alpha
     - git tag $TRAVIS_TAG
 deploy:
   provider: releases
-  api_key: "6827807f0febef3b5d7d80adc632b05b3d0f69e7"
+  api_key:
+    secure: "6827807f0febef3b5d7d80adc632b05b3d0f69e7"
   file:
     - "Trash"
     - "Trash.exe"
   skip_cleanup: true
+  on:
+    tags: true
