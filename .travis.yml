@@ -9,7 +9,7 @@ script:
     - mkdir Debug && cd Debug
     - g++ -MM ../RichmanMA.cpp
     - g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"RichmanMA.d" -MT"RichmanMA.o" -o "RichmanMA.o" "../RichmanMA.cpp"
-    - g++  -o $TRAVIS_OS_NAME ./RichmanMA.o ./test.o
+    - g++  -o $TRAVIS_OS_NAME ./RichmanMA.o
 before_deploy:
     - git config --local user.name "Aaron Liu"
     - git config --local user.email "aaronliu0130@gmail.com"
