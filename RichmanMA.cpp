@@ -187,7 +187,7 @@ void help(string param) {
 					sleep(7);
 #endif
 					printf("Details in https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode!\n");
-#ifdef __WIN32_
+#ifdef __WIN32__
 					Sleep(3000);
 #else
 					sleep(3);
