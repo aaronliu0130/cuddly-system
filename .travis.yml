@@ -2,7 +2,9 @@ os:
     - osx
     - windows
 language: cpp
-compiler: clang++
+compiler: g++
+before_install:
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]; then export PROGRAM = Trash; else export PROGRAM = Trash.exe; fi
 script:
     - mkdir Debug && cd Debug
     - g++ -MM
@@ -16,7 +18,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key: "6827807f0febef3b5d7d80adc632b05b3d0f69e7"
-  file: "Trash"
+  file: "$PROGRAM"
   skip_cleanup: true
   on:
     tags: true
