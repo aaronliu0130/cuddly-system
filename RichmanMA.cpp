@@ -4,7 +4,8 @@
  *  Created on: Apr 7, 2019
  *      Author: Aaron
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdio>
 #include"libs/utils.h"
 //#define DEBUG
 //#define RELEASE
