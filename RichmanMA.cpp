@@ -161,7 +161,7 @@ void help(string param) {
 			ENDTRIE;
 		CASE("about")
 			flag=1;
-			printf("Richman Sun Tzu's Martial Arts Edition\n\nVersion: 0.0.4 Alpha, NATE\nLast Version Hash: f623d78650904f0640cb57e1ec90989026f91717\n\nLiscensed under Creative Commons by-nc-sa. Monopoly(aka. Richman or Uncle Wang in China) is a trademark of Hasbro, Inc., https://www.hasbro.com/..");
+			printf("Richman Sun Tzu's Martial Arts Edition\n\nVersion: 0.1.0 Alpha, NATE\nLast Version Hash: f623d78650904f0640cb57e1ec90989026f91717\n\nLiscensed under Creative Commons by-nc-sa. Monopoly(aka. Richman or Uncle Wang in China) is a trademark of Hasbro, Inc., https://www.hasbro.com/..");
 	CASE("license")
 		printf("Please select: \"legal\" or \"deed\"?");
 		cin>>temp;
