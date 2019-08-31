@@ -7,7 +7,7 @@ before_install:
     - if [ "$TRAVIS_OS_NAME" = "osx" ]; then PROGRAM="Trash"; else export PROGRAM="Trash.exe"; fi
 script:
     - mkdir Debug && cd Debug
-    - g++ -MM
+    - g++ -MM ../RichmanMA.c
     - g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"RichmanMA.d" -MT"RichmanMA.o" -o "RichmanMA.o" "../RichmanMA.cpp"
     - g++  -o $TRAVIS_OS_NAME ./RichmanMA.o ./test.o
 before_deploy:
