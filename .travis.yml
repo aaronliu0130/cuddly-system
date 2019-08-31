@@ -18,7 +18,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key: "6827807f0febef3b5d7d80adc632b05b3d0f69e7"
-  file: "$PROGRAM"
+  file:
+    - "Trash"
+    - "Trash.exe"
   skip_cleanup: true
-  on:
-    tags: true
