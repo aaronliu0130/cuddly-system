@@ -6,6 +6,8 @@
  */
 #include<iostream>
 #include<cstdio>
+#include<ctime>
+#include<cstdlib>
 #include"libs/utils.h"
 //#define DEBUG
 //#define RELEASE
@@ -179,14 +181,14 @@ void help(string param) {
 					printf("Here you go!\n");
 #ifdef __WIN32__
 					system("start Drumrool.mp3");
-					sleep(7000);
+					Sleep(7000);
 #else
 					system("open Drumrool.mp3");
 					sleep(7);
 #endif
 					printf("Details in https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode!\n");
 #ifdef __WIN32_
-					sleep(3000);
+					Sleep(3000);
 #else
 					sleep(3);
 #endif
@@ -203,8 +205,8 @@ void help(string param) {
 					printf("░░░█░░██░░▀█▄▄▄█▄▄█▄████░█\n");
 					printf("░░░░█░░░▀▀▄░█░░░█░███████░█\n");
 					printf("░░░░░▀▄░░░▀▀▄▄▄█▄█▄█▄█▄▀░░█\n");
-					printf("░░░░░░░▀▄▄░▒▒▒▒░░░░░░░░░░█\n");
-					printf("░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░█\n");
+					printf("░░░░░░░▀▄▄░░░░░░░░░░░░░░░█\n");
+					printf("░░░░░░░░░░▀▀▄▄░░░░░░░░░░░░█\n");
 					printf("░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░█");
 				}
 			ENDTRIE;
@@ -314,7 +316,7 @@ int main() {
 		if(temp=="Wrong"||temp=="no"||temp=="wrong"||temp=="No"){
 			printf("Selling your private info to the next player...\n");
 #ifdef __WIN32__
-			sleep(7000);
+			Sleep(7000);
 #else
 			sleep(7);
 #endif
@@ -331,7 +333,7 @@ int main() {
 	printf("So, the winner is...\n");//TODO: Replace winner text with Shouty TTS
 #ifdef __WIN32__
 	system("start Drumrool.mp3");
-	sleep(7000);
+	Sleep(7000);
 #else
 	system("open Drumrool.mp3");
 	sleep(7);
