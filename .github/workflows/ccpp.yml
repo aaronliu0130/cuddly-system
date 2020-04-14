@@ -30,12 +30,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: compile
-        run: g++ -MM -std=c++11 RichmanMA.cpp
-      - name: link
-        run: g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF\"RichmanMA.d\" -MT\"RichmanMA.o\" -o \"RichmanMA.o\" \"RichmanMA.cpp\"
       - name: build
-        run: g++ -o "RichmanMA" RichmanMA.o
+        run: |
+          mkdir Debug && cd Debug
+          g++ -MM -std=c++11 ../RichmanMA.cpp
+          g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"RichmanMA.d" -MT"RichmanMA.o" -o "RichmanMA.o" "../RichmanMA.cpp"
+          g++  -o "RichmanMA" ./RichmanMA.o
       - name: cleanup
         run: rm RichmanMA.d RichmanMA.o
       - name: upload asset
@@ -53,12 +53,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: compile
-      run: g++ -MM -std=c++11 RichmanMA.cpp
-    - name: link
-      run: g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF\"RichmanMA.d\" -MT\"RichmanMA.o\" -o \"RichmanMA.o\" \"RichmanMA.cpp\"
     - name: build
-      run: g++ -o "RichmanMA" RichmanMA.o
+      run: |
+        mkdir Debug && cd Debug
+        g++ -MM -std=c++11 ../RichmanMA.cpp
+        g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"RichmanMA.d" -MT"RichmanMA.o" -o "RichmanMA.o" "../RichmanMA.cpp"
+        g++  -o "RichmanMA" ./RichmanMA.o
     - name: cleanup
       run: rm RichmanMA.d RichmanMA.o
     - name: upload asset
@@ -76,12 +76,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: compile
-        run: g++ -MM -std=c++11 RichmanMA.cpp
-      - name: link
-        run: g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF\"RichmanMA.d\" -MT\"RichmanMA.o\" -o \"RichmanMA.o\" \"RichmanMA.cpp\"
       - name: build
-        run: g++ -o "RichmanMA.exe" RichmanMA.o
+        run: |
+          mkdir Debug && cd Debug
+          g++ -MM -std=c++11 ../RichmanMA.cpp
+          g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"RichmanMA.d" -MT"RichmanMA.o" -o "RichmanMA.o" "../RichmanMA.cpp"
+          g++  -o "RichmanMA.exe" ./RichmanMA.o
       - name: cleanup
         run: rm RichmanMA.d RichmanMA.o
       - name: upload asset
