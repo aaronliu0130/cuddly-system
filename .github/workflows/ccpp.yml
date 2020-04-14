@@ -42,9 +42,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./RichmanMA
           asset_name: Richman-For-macOS
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
   buildu:
     name: Build on ubuntu
     runs-on: ubuntu-latest
@@ -63,9 +63,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./RichmanMA
         asset_name: Richman-For-ubuntu
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
   buildw:
     name: Build on windows
     runs-on: windows-latest
@@ -84,6 +84,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: .\RichmanMA.exe
           asset_name: Richman-For-windows.exe
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
