@@ -19,8 +19,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ join('v0.1.0 Alpha Commit ',github.sha) }}
         with:
-          tag_name: ${{ TAG }}
-          release_name: Release ${{ TAG }}
+          tag_name: ${{ join('',TAG) }}
+          release_name: ${{ join('Release ',TAG) }}
           body: |
             We have made some features! A new step to being complete.
           draft: false
