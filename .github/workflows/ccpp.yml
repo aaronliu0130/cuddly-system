@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ join('v0.1.0 Alpha Commit ',github.sha)) }}
+          tag_name: ${{ join('v0.1.0 Alpha Commit ',github.sha) }}
           release_name: ${{ join('Release v0.1.0 Alpha Commit ',github.sha) }}
           body: |
             We have made some features! A new step to being complete.
