@@ -17,10 +17,9 @@ jobs:
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ join('v0.1.0 Alpha Commit ',github.sha) }}
         with:
-          tag_name: ${{ join('',TAG) }}
-          release_name: ${{ join('Release ',TAG) }}
+          tag_name: ${{ join('v0.1.0 Alpha Commit ',github.sha)) }}
+          release_name: ${{ join('Release v0.1.0 Alpha Commit ',github.sha) }}
           body: |
             We have made some features! A new step to being complete.
           draft: false
