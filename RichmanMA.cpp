@@ -4,6 +4,7 @@
  *  Created on: Apr 7, 2019
  *      Author: Aaron
  */
+#define _GLIBCXX_USE_CXX11_ABI 0
 #include <iostream>
 #include <cstdio>
 #include <ctime>
@@ -18,6 +19,14 @@
 #include <unistd.h>
 #endif
 using namespace std;
+typedef struct card
+{
+	string title, desc;
+	int effect = -1;
+	card(string a, string b, int c){
+		title=a,desc=b,effect=c;
+	};
+}deck;
 struct playe
 {
 	/**
@@ -28,12 +37,6 @@ struct playe
 	vector<deck> mCards, wCards;
 	char name[100], current[20] = "Camp";
 } player[4];
-typedef struct card
-{
-	string title, desc;
-	int effect = -1;
-	card(string title, string desc, int effect);
-} deck;
 class gb
 {
 public:
@@ -97,10 +100,10 @@ void MACard(bool get, int pNo)
 	{
 		if (!player[pNo].mCards.size())
 			cout << "You have not studied Sun Tzu's Martial Arts yet, you anti-book!" << '\n';
-		else{
-			for(int i(0); i < player[pNo].mCards.size(); i++)
+		else
+		{
+			for (int i(0); i < player[pNo].mCards.size(); i++)
 			{
-				
 			}
 		}
 	}
