@@ -47,3 +47,4 @@
 /.settings/
 /Debug/
 test.cpp
+.vscode/
