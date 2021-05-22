@@ -104,6 +104,11 @@ void MACard(bool get, int pNo)
 		{
 			for (int i(0); i < player[pNo].mCards.size(); i++)
 			{
+				//@TODO: Add actual functionality after martial art cards.
+				cout << "Martial Cards you have:\n";
+				for(auto a:player[pNo].mCards){
+					cout<<'\t'<<a.title<<'\n';
+				}
 			}
 		}
 	}
@@ -175,8 +180,8 @@ void controls()
 {
 	printf("ＤＩＳＣＬＡＩＭＥＲ：\nPress stands for input and press enter here.\n");
 	printf("Press \"d\" to roll the die!\n");
-	printf("Press \"m\" to get a Martial Card's info!\n");
-	printf("Press \"w\" to get a Wildcard's info!\n");
+	printf("Press \"m\" to get Martial Card info!\n");
+	printf("Press \"w\" to get Wildcard info!\n");
 	printf(
 		"Also, if you need any help on a specific event, you can press \"help\" followed by a space, then the event you need help on.\n");
 	printf(
@@ -187,7 +192,7 @@ void controls()
 		"The screen will also display how many Battle Power you have. Upon prompted, enter the number of battle power you wish to exert!");
 	cout << endl;
 	printf("That's it!\n");
-	printf("Press any key to continue!");
+	printf("Press any key to continue...");
 	cin.get();
 #ifdef __WIN32__
 	system("cls");
@@ -291,7 +296,7 @@ void help(string param)
 	}
 	cout << endl;
 	printf(
-		"Press a key to continue!\nIf you still have other commands, press \"help\" followed by that command");
+		"Press any key to continue.\nIf you still have other commands, press \"help\" followed by that command");
 	cin >> param;
 	if (param == "help")
 	{
@@ -332,7 +337,7 @@ int main()
 	printf("If you wish to look at the controls, press c!\n");
 	printf("Now...\n");
 	printf("GAME START!\n");
-	printf("(press any key and then enter to continue)");
+	printf("Press enter to continue...");
 	cin.get();
 	do
 	{
@@ -366,8 +371,8 @@ int main()
 			controls();
 			goto restart;
 		case 'm':
-			//@TODO: Finish MCard()
-
+			//@TODO: Finish MACard()
+			MACard(0,pNo);
 			break;
 		case 'w':
 			//@TODO: Finish WCard()
