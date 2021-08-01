@@ -1,10 +1,9 @@
 /*
  * RichmanMA.cpp
- *
+ * C++11+ support is needed.
  *  Created on: Apr 7, 2019
  *      Author: Aaron
  */
-#define _GLIBCXX_USE_CXX11_ABI 0
 #include <iostream>
 #include <cstdio>
 #include <ctime>
@@ -13,23 +12,22 @@
 #include "libs/utils.h"
 //#define DEBUG
 //#define RELEASE
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <windows.h>
 #else
 #include <unistd.h>
 #endif
 using namespace std;
 typedef struct card {
-	string title, desc;
-	int effect = -1;
+	string title, desc;int id(-1);
 	card(string a, string b, int c) {
-		title = a, desc = b, effect = c;
+		title = a, desc = b, id = c;
 	}
 	;
 } deck;
 /**
  * @struct playe
- * @brief The variable type that contains the player's information
+ * @brief PLayer Information
  *
  */
 struct playe {
@@ -57,40 +55,41 @@ string gb::places[30] = { "Camp", "Martial Arts", "Recruit", "Martial Arts",
 		"Martial Arts", "Front-line Message" };
 int gb::players;
 //Repeating is due to actual repeating cards in the original boxed set
-vector<deck> gb::mDeck = { {"Burn-Siegeth(6)", "Act accordying to circumstances(Attack any battlefield but with two additional required troops)", 12},
-	{	"Burn-Siegeth(6)", "Act accordying to circumstances(Attack any battlefield but with two additional required troops)", 12},
-	{	"Contention(4)", "Tyme dost naught wait(Recruit twice)", 7},
-	{	"Espionageth(6)", "Ther ys nobodie closer to the armie than a spie(Super PK against another player with two additional card points)", 13},
-	{	"Espionageth(6)", "Ther ys nobodie closer to the armie than a spie(Super PK against another player with two additional card points)", 13}
+vector<deck> gb::mDeck = {
+	{	"Burn-Siegeth(6)", "Act accordying to circumstances(Attack any battlefield but with two additional required troops)", 1},
+	{	"Burn-Siegeth(6)", "Act accordying to circumstances(Attack any battlefield but with two additional required troops)", 1},
+	{	"Contention(4)", "Tyme dost naught wait(Recruit twice)", 2},
+	{	"Espionageth(6)", "Ther ys nobodie closer to the armie than a spie(Super PK against another player with two additional card points for you)", 3},
+	{	"Espionageth(6)", "Ther ys nobodie closer to the armie than a spie(Super PK against another player with two additional card points for you)", 3}
 	{	"Formation(3)", "Prepareth to protect thyself and wyn(Recruit twice)", 4},
 	{	"Formation(3)", "Prepareth to protect thyself and wyn(Recruit twice)", 4},
-	{	"Marchyng(2)", "Ten feet by forceth(Move forward two, four or six squares and execute the square's event)", 9},
-	{	"Marchyng(2)", "Ten feet by forceth(Move forward two, four or six squares and execute the square's event)", 9},
-	{	"Movement(2)", "Surprise attacketh and defend(Move forward one, three or five squares and execute the square's event)", 5},
-	{	"Movement(2)", "Surprise attacketh and defend(Move forward one, three or five squares and execute the square's event)", 5},
-	{	"Speed(4)", "Speed ys keie, naught combat(Attack any battlefield but with two additional required troops)", 2},
-	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 3},
-	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 3},
-	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 3},
-	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 3},
-	{	"Strength and Weaknesse(4)", "Attacketh weaknesses and retreat from strengths(You and the player with the least points gain three)", 6},
-	{	"Strength and Weaknesse(4)", "Attacketh weaknesses and retreat from strengths(You and the player with the least points gain three)", 6},
-	{	"Tacticks(2)", "War is craftie(Agriculture Once)", 1},
-	{	"Terrayn(3)", "The man o' terrayn ys aided(Move forward one, two or three squares and execute the square's event)", 10},
-	{	"Terrayn(3)", "The man o' terrayn ys aided(Move forward one, two or three squares and execute the square's event)", 10},
-	{	"Terrayn(3)", "The man o' terrayn ys aided(Move forward one, two or three squares and execute the square's event)", 10},
+	{	"Marchyng(2)", "Ten feet by forceth(Move forward two, four or six squares and execute the square's event)", 5},
+	{	"Marchyng(2)", "Ten feet by forceth(Move forward two, four or six squares and execute the square's event)", 5},
+	{	"Movement(2)", "Surprise attacketh and defend(Move forward one, three or five squares and execute the square's event)", 6},
+	{	"Movement(2)", "Surprise attacketh and defend(Move forward one, three or five squares and execute the square's event)", 6},
+	{	"Speed(4)", "Speed ys keie, naught combat(Attack any battlefield but with two additional required troops)", 7},
+	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 8},
+	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 8},
+	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 8},
+	{	"Strategie(5)", "The man who knows the enemy as wel as himself wyns(Take four cards and keep one of them)", 8},
+	{	"Strength and Weaknesse(4)", "Attacketh weaknesses and retreat from strengths(You and the player with the least points gain three)", 9},
+	{	"Strength and Weaknesse(4)", "Attacketh weaknesses and retreat from strengths(You and the player with the least points gain three)", 9},
+	{	"Tacticks(2)", "War is craftie(Agriculture Once)", 10},
+	{	"Terrayn(3)", "The man o' terrayn ys aided(Move forward one, two or three squares and execute the square's event)", 11},
+	{	"Terrayn(3)", "The man o' terrayn ys aided(Move forward one, two or three squares and execute the square's event)", 11},
+	{	"Terrayn(3)", "The man o' terrayn ys aided(Move forward one, two or three squares and execute the square's event)", 11},
 },
 gb::wDeck = {
-	{	"Emperores Reward", "Receive 2000 yuan.", 4},
-	{	"Supplie Cut", "You and another player roll dice. The lower one(s) will lose 2000 yuan.", 3},
-	{	"Citie Full o' Soldiers", "All players receive two troops. Then, return and shuffle all the battle cards.", 2},
-	{	"Recruitment Driveth", "All players roll dice. The highest one(s) will receive three troops.", 1},
-	{	"Reinforcements Arriveth", "Receive 5 troops.", 6},
-	{	"Victory", "Receive 3 troops.", 5}};
+	{	"Citie Full o' Soldiers", "All players receive two troops. Then, return and shuffle all the battle cards.", 1},
+	{	"Emperores Reward", "Receive 2000 yuan.", 2},
+	{	"Recruitment Driveth", "All players roll dice. The highest one(s) will receive three troops.", 3},
+	{	"Reinforcements Arriveth", "Receive 5 troops.", 4},
+	{	"Supplie Cut", "You and another player roll dice. The lower one(s) will lose 2000 yuan.", 5},
+	{	"Victory", "Receive 3 troops.", 6}};
 int pNo = -1;
 /**
  * @fn int dice()
- * @brief Dice roll
+ * @brief Dice Roll
  *
  * @return Random number from 1~6
  */
@@ -100,14 +99,15 @@ int dice() {
 }
 /**
  * @fn void MACard(bool, int)
- * @brief
+ * @brief Martial Art Cards
  *
- * @param get Whether or not the player is drawing a card from the deck
  * @param pNo No. of player
+ * @param get Whether or not the player is drawing a card from the deck
  */
-void MACard(bool get, int pNo) {
+void MACard(int pNo, bool get = 0) {
 	if (get) {
 		int ran(rand() % gb::mDeck.size());
+		cout << gb::mDeck[ran].title << "!\n";
 		player[pNo].mCards.push_back(gb::mDeck[ran]);
 		gb::mDeck.erase(gb::mDeck.begin() + ran);
 	} else {
@@ -116,19 +116,43 @@ void MACard(bool get, int pNo) {
 					<< "You have not studied Sun Tzu's Martial Arts yet, you anti-book!"
 					<< '\n';
 		else {
-			for (int i(0); i < player[pNo].mCards.size(); i++) {
-				//@TODO: Add actual functionality after martial art cards.
-				cout << "Martial Cards you have:\n";
-				for (auto a : player[pNo].mCards) {
-					cout << '\t' << a.title << '\n';
-				}
-			}
+			//@TODO: Add actual functionality after martial art cards.
+			cout << "Martial Cards you have:\n";
+			for (auto a : player[pNo].mCards)
+				cout << '\t' << a.title << "\tID:" << a.id << '\n';
+			cout
+					<< "Input ID of the card to view more info, 'x' followed by the ID of the card to execute the card's effects, or 'q' to exit: ";
+			string menu;
+			cin >> menu;
+			if (menu[0] == 'q')
+				return;
+			if (menu[0] == 'x')
+				if (menu.length() == 1)
+					switch (menu[1]) {
+					case '1':
+						battle(pNo, 1);
+					}
 		}
 	}
 }
-void WCard(bool get) {
-	//@TODO: Add actual functionality after wildcards
+/**
+ * @fn void WCard(bool, int)
+ * @brief Wildcards
+ * Not functional yet.
+ * @param pNo No. of player
+ * @param get Whether or not the player is drawing a card from the deck
+ */
+void WCard(int pNo, bool get = 0) {
+//@TODO: Add actual functionality after wildcards
 }
+/**
+ * @fn void battle(bool, int, int)
+ * @brief Battlefields
+ * Not functional yet
+ * @param pNo No. of player
+ * @param bonus Whether or not there is a bonus from the martial card
+ */
+void battle(int pNo, bool bonus = 0);
 /**
  * @fn void camp(int)
  * @brief Handles camping
@@ -143,7 +167,7 @@ void camp(int pNo) {
  * @brief Handles board events
  *
  * @param event String of event name
- * @param pNo
+ * @param pNo No. of player
  */
 void event(char event[], int pNo) {
 	char e = event[0];
@@ -157,8 +181,8 @@ void event(char event[], int pNo) {
 		break;
 	case 'M':
 		cout
-				<< "You continue to learn your copy of Sun Tzu's Martial Arts! You learned something new!\n You got a Martial Art Card!\n Its....\n \t\t\ta......";
-		MACard(1, pNo);
+				<< "You continue to learn your copy of Sun Tzu's Martial Arts! You learned something new!\n You got a Martial Art Card!\n Its....\n \t\t\tcalled...... ";
+		MACard(pNo, 1);
 		break;
 	case 'R': {
 		cout
@@ -174,8 +198,8 @@ void event(char event[], int pNo) {
 		break;
 	case 'F':
 		cout
-				<< "The frontline gave some help!\n You got a Wildcard!\n Its....\n 			a......";
-		WCard(1);
+				<< "The frontline gave some help!\n You got a Wildcard!\n Its....\n \t\t\tcalled...... ";
+		WCard(pNo, 1);
 		break;
 	case 'A': {
 		printf(
@@ -219,7 +243,7 @@ void controls() {
 	printf("That's it!\n");
 	printf("Press any key to continue...");
 	cin.get();
-#ifdef __WIN32__
+#ifdef _WIN32
 	system("cls");
 #else
 	system("clear");
@@ -233,7 +257,7 @@ void controls() {
  */
 void help(string param) {
 	bool flag = 0;
-	string temp;
+	string menu;
 	TRIE(param)
 	CASE("help")
 	flag = 1;
@@ -247,8 +271,8 @@ void help(string param) {
 	printf("license <deed/legal>\n");
 	printf("	Specific information about the license. \"deed\" is a synopsis, and \"legal\" contains a long list of legal information.");
 	CASE("list")
-	cin >> temp;
-	TRIE(temp)
+	cin >> menu;
+	TRIE(menu)
 	CASE("events")
 	flag = 1;
 	printf("All events(clockwise from start):\n");
@@ -266,11 +290,11 @@ void help(string param) {
 	ENDTRIE;
 	CASE("about")
 	flag = 1;
-	printf("Richman Sun Tzu's Martial Arts Edition\n\nVersion: 0.1.0 Alpha, NATE\nLast Version Hash: f623d78650904f0640cb57e1ec90989026f91717\n\nLiscensed under Creative Commons by-nc-sa. Monopoly(aka. Richman or Uncle Wang in China) is a trademark of Hasbro, Inc., https://www.hasbro.com/..");
+	printf("Richman Sun Tzu's Martial Arts Edition\n\nVersion: 0.1.0 Alpha\nLast Version Hash: f623d78650904f0640cb57e1ec90989026f91717\n\nLiscensed under Creative Commons by-nc-sa. Monopoly is a trademark of Hasbro, Inc., https://www.hasbro.com/..");
 	CASE("license")
 	printf("Please select: \"legal\" or \"deed\"?");
-	cin >> temp;
-	TRIE(temp)
+	cin >> menu;
+	TRIE(menu)
 	CASE("deed")
 	flag = 1;
 	printf("ＤＩＳＣＬＡＩＭＥＲ：\nThis deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material.\nCreative Commons is not a law firm and does not provide legal services. Distributing, displaying, or linking to this deed or the license that it summarizes does not create a lawyer-client or any other relationship.\n");
@@ -279,15 +303,15 @@ void help(string param) {
 	CASE("legal")
 	flag = 1;
 	printf("WARNING:\n This is lengthy. Are you sure you want to output legals(y/n)?");
-	cin >> temp;
-	if (temp == "n")
+	cin >> menu;
+	if (menu == "n")
 	{
 		printf("Okay then. Saved a bit of work for me.");
 	}
 	else
 	{
 		printf("Here you go!\n");
-#ifdef __WIN32__
+#ifdef _WIN32
 		system("start Drumrool.mp3");
 		Sleep(7000);
 #else
@@ -295,7 +319,7 @@ void help(string param) {
 		sleep(7);
 #endif
 		printf("Details in https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode!\n");
-#ifdef __WIN32__
+#ifdef _WIN32
 		Sleep(3000);
 #else
 		sleep(3);
@@ -331,7 +355,7 @@ void help(string param) {
 		cin >> param;
 		help(param);
 	}
-#ifdef __WIN32__
+#ifdef _WIN32
 	system("cls");
 #else
 	system("clear");
@@ -375,7 +399,7 @@ int main() {
 		if (++pNo > gb::players)
 			pNo = 0;
 #ifdef release
-#ifdef __WIN32__
+#ifdef _WIN32
 		system("cls");
 #else
 		system("clear");
@@ -397,8 +421,7 @@ int main() {
 			controls();
 			goto restart;
 		case 'm':
-			//@TODO: Finish MACard()
-			MACard(0, pNo);
+			MACard(pNo);
 			break;
 		case 'w':
 			//@TODO: Finish WCard()
@@ -426,14 +449,14 @@ int main() {
 				"When you're going to transfer this device to %s, press any key to continue!",
 				player[pNo].name);
 		cin >> temp;
-#ifdef __WIN32__
+#ifdef _WIN32
 		system("cls");
 #else
 		system("clear");
 #endif
 	} while (player[pNo].points < 20);
 	printf("So, the winner is...\n"); //TODO: Replace winner text with Shouty TTS
-#ifdef __WIN32__
+#ifdef _WIN32
 	system("start Drumrool.mp3");
 	Sleep(7000);
 #else
